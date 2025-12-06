@@ -7,7 +7,7 @@ test('Adding a product reduces available stock', async ({ page }) => {
   const home = new HomePage(page);
 
   await login.goto();
-  await login.login('test@example.com', 'password123');
+  await login.login('test@example.com', 'test');
 
   const before = await home.getStockValue(0);
   await home.addFirstProduct();

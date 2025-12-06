@@ -10,7 +10,7 @@ export class LoginPage {
   }
 
   async goto() {
-    await this.page.goto('/login.html');
+    await this.page.goto('https://rukesh2.github.io/automation-playwright/login.html');
   }
 
   async login(email, pwd) {
