@@ -10,6 +10,12 @@ pipeline {
     }
 
     stages {
+        stage('Install Dependencies') {
+        steps {
+            sh 'npm install'
+            sh 'npx playwright install --with-deps'
+          }
+       }
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/rukesh2/automation-playwright.git'
