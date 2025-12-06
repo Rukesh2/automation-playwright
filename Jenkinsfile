@@ -42,30 +42,15 @@ pipeline {
     }
 
     post {
-        success {
-            emailext to: "rukeshruk1991@gmail.com",
-                subject: "SUCCESS ✓ Playwright Automation - Jenkins Build #${BUILD_NUMBER}",
-                body: """
-🎉 Build Success
-
-Project: Automation Playwright
-Build URL: ${BUILD_URL}
-Report: ${BUILD_URL}PlaywrightTestReport/
-
-All tests passed successfully.
-                """
-        }
-        failure {
-            emailext to: "rukeshruk1991@gmail.com",
-                subject: "❌ FAILED — Playwright Automation - Jenkins Build #${BUILD_NUMBER}",
-                body: """
-🚨 Build Failed
-
-Project: Automation Playwright
-Build URL: ${BUILD_URL}
-
-Check console logs or HTML report for details.
-                """
-        }
+    success {
+        mail to: "rukeshruk1991@gmail.com",
+            subject: "SUCCESS ✓ Playwright Automation - Jenkins Build #${BUILD_NUMBER}",
+            body: "Build succeeded — ${BUILD_URL}"
     }
+    failure {
+        mail to: "rukeshruk1991@gmail.com",
+            subject: "❌ FAILED — Playwright Automation - Jenkins Build #${BUILD_NUMBER}",
+            body: "Build failed — check logs: ${BUILD_URL}"
+    }
+}
 }
