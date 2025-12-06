@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page – Products</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .product { border:1px solid #ccc; padding:12px; margin:12px 0; width:330px; }
+    button { margin-top: 8px; padding: 6px 12px; }
+    .out { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Products Available</h2>
+
+  <div id="products"></div>
+  <br>
+  <button onclick="goToCart()">Go to Cart</button>
+
+  <script>
+    let stock = [
+      { name: "Keyboard", qty: 5 },
+      { name: "Mouse", qty: 4 },
+      { name: "Headphones", qty: 3 }
+    ];
+
+    function loadProducts() {
+      let container = document.getElementById("products");
+      container.innerHTML = "";
+      stock.forEach((item, index) => {
+        container.innerHTML += `
+        <div class="product">
+          <strong>${item.name}</strong> <br>
+          Available: <span id="available-${index}">${item.qty}</span>
+          <br>
+          <button onclick="addToCart(${index})" ${item.qty == 0 ? "disabled" : ""}>Add</button>
+          ${item.qty == 0 ? "<p class='out'>Out of Stock</p>" : ""}
+        </div>
+        `;
+      });
+    }
+
+    function addToCart(index) {
+      let cart = JSON.parse(localStorage.getItem("cart") || "{}");
+
+      if (cart[stock[index].name]) {
+        cart[stock[index].name]++;
+      } else {
+        cart[stock[index].name] = 1;
+      }
+      stock[index].qty--;
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadProducts();
+    }
+
+    function goToCart() {
+      window.location.href = "cart.html";
+    }
+
+    loadProducts();
+  </script>
+
+</body>
+</html>

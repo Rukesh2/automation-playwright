@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    input, button { padding: 8px; margin: 6px 0; width: 260px; }
+    .error { color: red; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>Login</h2>
+
+  <input id="email" type="email" placeholder="Email"><br>
+  <input id="password" type="password" placeholder="Password"><br>
+
+  <button onclick="login()">Login</button>
+  <div id="message"></div>
+
+  <script>
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (email === "test@example.com" && password === "test") {
+        window.location.href = "home.html";
+      } else {
+        document.getElementById("message").innerHTML =
+          "<p class='error'>Invalid credentials</p>";
+      }
+    }
+  </script>
+
+</body>
+</html>

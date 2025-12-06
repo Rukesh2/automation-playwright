@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .item { border:1px solid #28a745; padding:10px; margin:10px 0; width:330px; }
+    button { padding: 4px 8px; }
+  </style>
+</head>
+<body>
+
+  <h2>Your Cart</h2>
+  <div id="cart"></div>
+  <br>
+  <button onclick="goHome()">Back to Home</button>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart") || "{}");
+
+    function updateCartUI() {
+      let box = document.getElementById("cart");
+      box.innerHTML = "";
+
+      let names = Object.keys(cart);
+      if (names.length === 0) {
+        box.innerHTML = "<p>No items in cart</p>";
+        return;
+      }
+
+      names.forEach(name => {
+        box.innerHTML += `
+          <div class="item">
+            <strong>${name}</strong> <br>
+            Quantity: <span id="qty-${name}">${cart[name]}</span>
+            <br><br>
+            <button onclick="increase('${name}')">+</button>
+            <button onclick="decrease('${name}')">-</button>
+          </div>
+        `;
+      });
+    }
+
+    function increase(name) {
+      cart[name]++;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function decrease(name) {
+      if (cart[name] == 1) {
+        delete cart[name];
+      } else {
+        cart[name]--;
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function goHome() {
+      window.location.href = "home.html";
+    }
+
+    updateCartUI();
+  </script>
+
+</body>
+</html>

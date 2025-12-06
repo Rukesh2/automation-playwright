@@ -1,0 +1,48 @@
+# Node dependencies
+node_modules/
+
+# Playwright reports
+test-results/
+playwright-report/
+blob-report/
+trace.zip
+
+# Environment files
+.env
+.env.* 
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build / Temporary files
+dist/
+out/
+build/
+.tmp/
+
+# Coverage files (in case you add them later)
+coverage/
+lcov-report/
+
+# Cache
+.cache/
+.playwright/
+
+# Local history / backups
+*.swp
+*.bak
+*.orig
+
+# Windows thumbnail db
+ehthumbs.db
